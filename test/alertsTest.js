@@ -19,7 +19,7 @@ const initializeEnvironment = () => {
   return {config, elements};
 };
 
-describe('Array', () => {
+describe('Check the Alert Element to se if an alert is thrown when a new Availability is checked', () => {
   it('Should not throw an alert when availability > 80% and new availability > 80%', () => {
     const {config, elements} = initializeEnvironment();
     let pastTenMinutesQueue = initializeQueueAvailabilityAbove80(1);
