@@ -27,7 +27,7 @@ const computeMetrics = (website, numberOfPoints) => {
   return {availability, averageResponseTime, responseCodeCount, maxResponseTime};
 };
 
-const computeTwoMinutesMetrics = website => computeMetrics(website, 2 * 60 / website.interval);
-const computeTenMinutesMetrics = website => computeMetrics(website, 10 * 60 / website.interval);
+const computeTwoMinutesMetrics = website => computeMetrics(website, 1000 * 2 * 60 / website.interval);
+const computeTenMinutesMetrics = website => computeMetrics(website, 1000 * 10 * 60 / website.interval);
 
 module.exports = {computeTwoMinutesMetrics, computeTenMinutesMetrics};

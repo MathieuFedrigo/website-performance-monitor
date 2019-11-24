@@ -14,7 +14,7 @@ module.exports = (grid, url, interval) => {
 
   detailsBox.setContent('' +
     '{bold}Website:{/bold} {blue-fg}' + url + '{/blue-fg}\n' +
-    '{bold}Check intervals:{/bold} {blue-fg}' + interval + ' second' + '{/blue-fg}\n' +
+    '{bold}Check intervals:{/bold} {blue-fg}' + interval + ' ms' + '{/blue-fg}\n' +
     '{bold}Status:{/bold} ' + '{red-fg}DOWN{/red-fg}'
   );
 

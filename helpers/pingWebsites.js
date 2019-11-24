@@ -17,7 +17,7 @@ const updateData = website => {
       // We store the statusCode and the response time inside the website data queue.
       website.data.push([resp.statusCode, resp.timingPhases.firstByte]);
     }
-    if (website.data.length > 60 * 60 / website.interval) website.data.shift();
+    if (website.data.length > 1000 * 60 * 60 / website.interval) website.data.shift();
   });
 };
 

@@ -3,7 +3,7 @@ const {computeTwoMinutesMetrics} = require('../src/metrics/computeMetrics');
 
 const config = [{
   url: 'http://www.google.com',
-  interval: 1,
+  interval: 1000,
   data: [],
 }];
 
