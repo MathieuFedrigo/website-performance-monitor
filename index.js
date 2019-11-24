@@ -12,19 +12,21 @@ const initializeQueue = require('./helpers/initializeQueue');
 const setKeyListeners = require('./src/keyListener/setKeyListeners');
 
 (async () => {
-  return await getConfig();
+  // The config object stores the url, the check interval and the Website response time data
+  return await getConfig(); // Get the config from the prompts.
 })().then((config) => {
-  let metricsTwoMinutes = [];
-  let metricsTenMinutes = [];
+  // Initialize the queue of the last 60 2min-metrics calculated every 10 seconds for 10 minutes.
   let pastTenMinutesQueue = initializeQueue(config.length);
+  // Initialize the queue of the last 60 10min-metrics calculated every minutes for 1 hour.
   let pastHourQueue = initializeQueue(config.length);
 
 
   const screen = blessed.screen();
   const grid = new contrib.grid({rows: 12, cols: 12, screen: screen});
-  const elements = setGridAll(grid, config);
+  const elements = setGridAll(grid, config); // Stores all the grid elements of all the websites.
 
   let currentPageIndex = config.length - 1;
+  // This function re-renders the corresponding grid elements of the desired page.
   const selectWebsite = pageIndex => {
     const newElement = setGrid(grid, config[pageIndex], config);
     const alerts = elements[pageIndex].alerts;
@@ -39,7 +41,8 @@ const setKeyListeners = require('./src/keyListener/setKeyListeners');
   screen.render();
 
 
+  //Start the different loops.
   startWebsitesPingLoop(config);
-  computeMetricsEveryTenSeconds(screen, config, elements, pastTenMinutesQueue, metricsTwoMinutes);
-  computeMetricsEveryMinute(screen, config, elements, pastHourQueue, metricsTenMinutes);
-}).catch(e => e.log());
+  computeMetricsEveryTenSeconds(screen, config, elements, pastTenMinutesQueue);
+  computeMetricsEveryMinute(screen, config, elements, pastHourQueue);
+}).catch(e => console.log(e));

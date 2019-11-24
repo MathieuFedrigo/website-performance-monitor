@@ -1,7 +1,8 @@
 const {computeTenMinutesMetrics} = require('./computeMetrics');
 const {refreshLastHourAll} = require('../update/refresh');
 
-module.exports = (screen, config, elements, pastHourQueue, metricsTenMinutes) => {
+module.exports = (screen, config, elements, pastHourQueue) => {
+  const metricsTenMinutes = [];
   setInterval(() => {
     config.forEach((website, websiteIndex) => {
       metricsTenMinutes[websiteIndex] = computeTenMinutesMetrics(website);

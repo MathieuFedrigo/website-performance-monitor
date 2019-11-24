@@ -10,7 +10,8 @@ const checkForAlerts = (newAvailability, pastTenMinutesQueue, elements, config, 
   }
 };
 
-const computeMetricsEveryTenSeconds = (screen, config, elements, pastTenMinutesQueue, metricsTwoMinutes) => {
+const computeMetricsEveryTenSeconds = (screen, config, elements, pastTenMinutesQueue) => {
+  const metricsTwoMinutes = [];
   setInterval(() => {
     config.forEach((website, websiteIndex) => {
       metricsTwoMinutes[websiteIndex] = computeTwoMinutesMetrics(website);

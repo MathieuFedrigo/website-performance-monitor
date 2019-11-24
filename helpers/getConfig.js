@@ -11,7 +11,7 @@ const questions = [
     type: 'number',
     name: 'interval',
     message: 'Check intervals? (in ms)',
-    initial: 1,
+    initial: 1000,
   },
   {
     type: 'confirm',
@@ -21,7 +21,7 @@ const questions = [
   }
 ];
 
-
+// Prompts the user for the different websites he wants then creates the config object.
 module.exports = async () => {
   const config = [];
   let response;
