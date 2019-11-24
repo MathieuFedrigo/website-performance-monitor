@@ -3,7 +3,7 @@
 const blessed = require('blessed');
 const contrib = require('blessed-contrib');
 const getConfig = require('./helpers/getConfig');
-const computeMetricsEveryTenSeconds = require('./src/metrics/computeMetricsEveryTenSeconds');
+const {computeMetricsEveryTenSeconds} = require('./src/metrics/computeMetricsEveryTenSeconds');
 const computeMetricsEveryMinute = require('./src/metrics/computeMetricsEveryMinute');
 const startWebsitesPingLoop = require('./helpers/pingWebsites');
 const {setGrid, setGridAll} = require('./src/setup/gridSetter');
@@ -16,8 +16,8 @@ const setKeyListeners = require('./src/keyListener/setKeyListeners');
 })().then((config) => {
   let metricsTwoMinutes = [];
   let metricsTenMinutes = [];
-  let pastTenMinutesQueue = initializeQueue();
-  let pastHourQueue = initializeQueue();
+  let pastTenMinutesQueue = initializeQueue(config.length);
+  let pastHourQueue = initializeQueue(config.length);
 
 
   const screen = blessed.screen();
