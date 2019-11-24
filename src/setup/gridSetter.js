@@ -42,8 +42,9 @@ const setGrid = (grid, website, config) => {
 };
 
 const setGridAll = (grid, config) => {
+  // Creates all grid elements for all websites
   const elements = config.map(website => setGrid(grid, website, config));
-  const alerts = setAlerts(grid);
+  const alerts = setAlerts(grid); // Creates a single instance of the Alerts element because it's shared across websites
   return elements.map(element => ({...element, alerts}));
 };
 
