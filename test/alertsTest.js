@@ -6,18 +6,23 @@ const {checkForAlerts} = require('../src/metrics/computeMetricsEveryTenSeconds')
 const initializeQueueAvailabilityAbove80 = require('./mockData/initializeQueueAvailabilityAbove80');
 const initializeQueueAvailabilityBelow80 = require('./mockData/initializeQueueAvailabilityBelow80');
 
+const initializeEnvironment = () => {
+  const config = [{
+    url: 'http://www.google.com',
+    interval: 1,
+    data: [],
+  }];
+
+  const screen = blessed.screen();
+  const grid = new contrib.grid({rows: 12, cols: 12, screen: screen});
+  const elements = setGridAll(grid, config);
+  return {config, elements};
+};
+
 describe('Array', () => {
   it('Should not throw an alert when availability > 80% and new availability > 80%', () => {
-    const config = [{
-      url: 'http://www.google.com',
-      interval: 1,
-      data: [],
-    }];
+    const {config, elements} = initializeEnvironment();
     let pastTenMinutesQueue = initializeQueueAvailabilityAbove80(1);
-
-    const screen = blessed.screen();
-    const grid = new contrib.grid({rows: 12, cols: 12, screen: screen});
-    const elements = setGridAll(grid, config);
 
     let currentAlerts = elements[0].alerts.logLines;
     expect(currentAlerts).to.have.lengthOf(0);
@@ -30,16 +35,8 @@ describe('Array', () => {
   });
 
   it('Should throw a DOWN alert when availability > 80% and new availability < 80%', () => {
-    const config = [{
-      url: 'http://www.google.com',
-      interval: 1,
-      data: [],
-    }];
+    const {config, elements} = initializeEnvironment();
     let pastTenMinutesQueue = initializeQueueAvailabilityAbove80(1);
-
-    const screen = blessed.screen();
-    const grid = new contrib.grid({rows: 12, cols: 12, screen: screen});
-    const elements = setGridAll(grid, config);
 
     let currentAlerts = elements[0].alerts.logLines;
     expect(currentAlerts).to.have.lengthOf(0);
@@ -53,16 +50,8 @@ describe('Array', () => {
   });
 
   it('Should throw a BACK ONLINE alert when availability < 80% and new availability > 80%', () => {
-    const config = [{
-      url: 'http://www.google.com',
-      interval: 1,
-      data: [],
-    }];
+    const {config, elements} = initializeEnvironment();
     let pastTenMinutesQueue = initializeQueueAvailabilityBelow80(1);
-
-    const screen = blessed.screen();
-    const grid = new contrib.grid({rows: 12, cols: 12, screen: screen});
-    const elements = setGridAll(grid, config);
 
     let currentAlerts = elements[0].alerts.logLines;
     expect(currentAlerts).to.have.lengthOf(0);
@@ -76,16 +65,8 @@ describe('Array', () => {
   });
 
   it('Should not throw an alert when availability < 80% and new availability < 80%', () => {
-    const config = [{
-      url: 'http://www.google.com',
-      interval: 1,
-      data: [],
-    }];
+    const {config, elements} = initializeEnvironment();
     let pastTenMinutesQueue = initializeQueueAvailabilityBelow80(1);
-
-    const screen = blessed.screen();
-    const grid = new contrib.grid({rows: 12, cols: 12, screen: screen});
-    const elements = setGridAll(grid, config);
 
     let currentAlerts = elements[0].alerts.logLines;
     expect(currentAlerts).to.have.lengthOf(0);
