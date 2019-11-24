@@ -20,6 +20,10 @@ const initializeEnvironment = () => {
 };
 
 describe('Check the Alert Element to se if an alert is thrown when a new Availability is checked', () => {
+  // For all those tests, we initialize the environment (screen, gird, elements) like it would be. Then we initialize
+  // the pastTenMinutesQueue like it could be during a session and we check the effects on the Alerts element of a
+  // new metric (without computing it from the data --> see metricsTest for the computation of this metric).
+
   it('Should not throw an alert when availability > 80% and new availability > 80%', () => {
     const {config, elements} = initializeEnvironment();
     let pastTenMinutesQueue = initializeQueueAvailabilityAbove80(1);

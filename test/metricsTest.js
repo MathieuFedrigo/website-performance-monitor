@@ -8,6 +8,8 @@ const config = [{
 }];
 
 describe('Check the metrics calculated when new data arrives.', () => {
+  // For all those tests, we just check if the metrics calculated when new data arrives are correct.
+
   it('Should compute an availability of 90%', () => {
     config[0].data = [
       [200, Math.random() * 1000], // 9 data points where website is available
